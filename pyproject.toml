@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "aoc2023-python"
+version = "0.1.0"
+description = ""
+authors = ["Nattapol Vannaboot <nattapol.vannaboot@gmail.com>"]
+
+
+[[tool.poetry.packages]]
+include = "mysolution"
+from = "src"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+click = "^8.1.7"
+more-itertools = "^10.1.0"
+numpy = "^1.26.2"
+matplotlib = "^3.8.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
