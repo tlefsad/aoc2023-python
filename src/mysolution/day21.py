@@ -75,6 +75,7 @@ def p1_solve(puzzle):
     return bfs(puzzle, 64)
 
 
+# Copy pasterino
 def p2_solve(puzzle):
     # polynomial extrapolation
     a0 = bfs(puzzle, 0*131 + 65)

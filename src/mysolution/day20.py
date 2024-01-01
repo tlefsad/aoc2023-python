@@ -22,12 +22,11 @@ def program(input_file):
     with open_input_file(input_file) as fobj:
         puzzle = read_input(fobj)
 
+    answers = solve(puzzle)
 
-    p1 = solve(puzzle, range(1000))
-    print("Part 1:", p1)
+    print("Part 1:", next(answers))
 
-    p2 = solve(puzzle, itertools.count())
-    print("Part 2:", p2)
+    print("Part 2:", next(answers))
 
    
 def read_input(fobj: TextIO):
@@ -82,7 +81,7 @@ class Puzzle:
         return cls(modules=modules)
 
 
-def solve(puzzle, cycles):
+def solve(puzzle):
     modules = puzzle.modules
 
     pulses = defaultdict(dict)
@@ -103,7 +102,7 @@ def solve(puzzle, cycles):
 
     
     counter = defaultdict(int)
-    for cycle in cycles:
+    for cycle in itertools.count():
         q = deque([(Pulse.LOW, 'button', 'broadcaster')])
         counter[Pulse.LOW] += 1
         while q:
@@ -131,13 +130,17 @@ def solve(puzzle, cycles):
                 conjunctions[dest] = cycle + 1
 
                 if all(conjunctions.values()):
-                    return math.lcm(*conjunctions.values())
+                    # Part 2
+                    yield math.lcm(*conjunctions.values())
+                    return
 
             for next_dest in module:
                 counter[pulse] += 1
                 q.append((pulse, dest, next_dest))
 
-    return counter[Pulse.LOW] * counter[Pulse.HIGH]
+        if cycle + 1 == 1000:
+            # Part 1 
+            yield counter[Pulse.LOW] * counter[Pulse.HIGH]
 
 
 if __name__ == '__main__':

@@ -15,6 +15,7 @@ click = "^8.1.7"
 more-itertools = "^10.1.0"
 numpy = "^1.26.2"
 matplotlib = "^3.8.2"
+sympy = "^1.12"
 
 
 [build-system]
